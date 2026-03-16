@@ -1,6 +1,34 @@
+# Python
+__pycache__/
+*.py[codz]
+*$py.class
+
+# Virtual environment
 venv/
 .env
-__pycache__/
-*.pyc
-node_modules/
+.venv
+env/
+
+# Python build
+build/
 dist/
+*.egg-info/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Database
+*.sqlite3
