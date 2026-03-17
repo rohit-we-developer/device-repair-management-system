@@ -12,6 +12,6 @@ class Service(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     title = Column(String(200), nullable=False)
     description = Column(TEXT)
-    price = Column(NUMERIC(10,2), nullable=False)
+    price = Column(NUMERIC(10, 2), nullable=False)
     estimated_time = Column(INTEGER)
     created_at = Column(TIMESTAMP, server_default=func.now())

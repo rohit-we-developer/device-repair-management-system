@@ -29,5 +29,4 @@ def create_service(service: ServiceCreate, db: Session = Depends(get_db)):
 
 @router.get("/", response_model=list[ServiceResponse])
 def get_services(db: Session = Depends(get_db)):
-    services = db.query(Service).all()
-    return services
+    return db.query(Service).all()
