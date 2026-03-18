@@ -1,5 +1,6 @@
-from sqlalchemy import Column, String, ForeignKey
+from sqlalchemy import Column, String, ForeignKey, TIMESTAMP
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.sql import func
 import uuid
 from app.models.base import Base
 
@@ -16,3 +17,6 @@ class Booking(Base):
     problem_description = Column(String)
 
     status = Column(String, default="pending")
+
+    # 🔥 ADD THIS (IMPORTANT FOR ANALYTICS)
+    created_at = Column(TIMESTAMP(timezone=True), server_default=func.now())

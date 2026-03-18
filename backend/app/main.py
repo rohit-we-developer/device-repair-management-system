@@ -7,7 +7,9 @@ from app.db.database import engine
 from app.api import services
 from app.api import users
 from app.api import booking
-from app.api import auth   # 👈 ADD THIS
+from app.api import auth
+from app.api import review   # 🔥 ADD THIS
+from app.api import admin
 
 app = FastAPI()
 
@@ -24,7 +26,9 @@ app.add_middleware(
 app.include_router(services.router)
 app.include_router(users.router)
 app.include_router(booking.router)
-app.include_router(auth.router)   # 👈 ADD THIS
+app.include_router(auth.router)
+app.include_router(review.router, prefix="/reviews", tags=["Reviews"])  # 🔥 ADD THIS
+app.include_router(admin.router, prefix="/admin", tags=["Admin"])
 
 # ✅ Health check
 @app.get("/")

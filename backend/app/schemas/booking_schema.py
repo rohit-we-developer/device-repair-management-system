@@ -3,7 +3,6 @@ from uuid import UUID
 
 
 class BookingCreate(BaseModel):
-    user_id: UUID
     service_id: UUID
     address: str
     problem_description: str
