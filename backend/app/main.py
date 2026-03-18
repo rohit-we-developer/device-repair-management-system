@@ -6,14 +6,15 @@ from app.db.database import engine
 
 from app.api import services
 from app.api import users
-from app.api import booking   # 👈 NEW
+from app.api import booking
+from app.api import auth   # 👈 ADD THIS
 
 app = FastAPI()
 
 # ✅ CORS (frontend साठी future safe)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # dev साठी ठीक
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -22,7 +23,8 @@ app.add_middleware(
 # ✅ Routes
 app.include_router(services.router)
 app.include_router(users.router)
-app.include_router(booking.router)   # 👈 BOOKING
+app.include_router(booking.router)
+app.include_router(auth.router)   # 👈 ADD THIS
 
 # ✅ Health check
 @app.get("/")

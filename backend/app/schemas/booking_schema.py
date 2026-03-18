@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 from uuid import UUID
-from datetime import datetime
 
 
 class BookingCreate(BaseModel):
@@ -15,8 +14,9 @@ class BookingResponse(BaseModel):
     user_id: UUID
     service_id: UUID
     technician_id: UUID | None
+    address: str
+    problem_description: str
     status: str
-    booking_date: datetime
 
     class Config:
         from_attributes = True
