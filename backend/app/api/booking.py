@@ -9,7 +9,7 @@ from app.models.service import Service
 from app.models.technician import Technician
 from app.schemas.booking_schema import BookingCreate
 
-router = APIRouter()
+router = APIRouter(prefix="/booking", tags=["Booking"])
 
 SECRET_KEY = "mysecretkey"
 ALGORITHM = "HS256"
