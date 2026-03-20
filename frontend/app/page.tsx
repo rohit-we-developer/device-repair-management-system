@@ -1,12 +1,10 @@
 import Image from "next/image";
-import Navbar from "@/components/Navbar";
+// import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-950 text-white">
 
-      {/* 🔥 NAVBAR */}
-      <Navbar />
 
       {/* 🔥 HERO SECTION */}
       <div className="grid md:grid-cols-2 items-center px-10 pt-32 max-w-7xl mx-auto">

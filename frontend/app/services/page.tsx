@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getServices } from "@/lib/api";
 import { getToken } from "@/lib/auth";
+import { bookService } from "@/lib/api";
 
 export default function ServicesPage() {
   const [services, setServices] = useState([]);
@@ -42,7 +43,13 @@ export default function ServicesPage() {
               ₹{s.price}
             </p>
 
-            <button className="mt-4 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+            <button
+              onClick={async () => {
+                const res = await bookService(s.id);
+                alert("Service booked!");
+              }}
+              className="mt-4 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+            >
               Book Now
             </button>
           </div>
