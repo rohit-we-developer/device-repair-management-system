@@ -1,4 +1,4 @@
-# from sqlalchemy import Column, String, TIMESTAMP
+# from sqlalchemy import Column, String, TIMESTAMP, Boolean
 # from sqlalchemy.dialects.postgresql import UUID
 # from sqlalchemy.sql import func
 # import uuid
@@ -14,7 +14,13 @@
 #     email = Column(String(150), unique=True, nullable=False)
 #     phone = Column(String(20))
 #     password_hash = Column(String, nullable=False)
+
 #     role = Column(String(20), default="user")
+
+#     # 🔥 EMAIL VERIFICATION
+#     is_verified = Column(Boolean, default=False)
+#     verification_token = Column(String, nullable=True)
+
 #     created_at = Column(TIMESTAMP, server_default=func.now())
 
 from sqlalchemy import Column, String, TIMESTAMP, Boolean
@@ -28,16 +34,23 @@ from app.models.base import Base
 class User(Base):
     __tablename__ = "users"
 
+    # 🔥 PRIMARY KEY
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+
+    # 🔥 BASIC INFO
     name = Column(String(100), nullable=False)
-    email = Column(String(150), unique=True, nullable=False)
-    phone = Column(String(20))
+    email = Column(String(150), unique=True, index=True, nullable=False)
+    phone = Column(String(20), nullable=True)
+
+    # 🔐 AUTH
     password_hash = Column(String, nullable=False)
 
-    role = Column(String(20), default="user")
+    # 🔥 ROLE SYSTEM (IMPORTANT)
+    role = Column(String(20), nullable=False, default="user")  # user | admin
 
-    # 🔥 EMAIL VERIFICATION
+    # 📧 EMAIL VERIFICATION
     is_verified = Column(Boolean, default=False)
     verification_token = Column(String, nullable=True)
 
-    created_at = Column(TIMESTAMP, server_default=func.now())
+    # 📅 TIMESTAMP
+    created_at = Column(TIMESTAMP(timezone=True), server_default=func.now())

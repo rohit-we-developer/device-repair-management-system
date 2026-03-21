@@ -1,7 +1,9 @@
 from fastapi import FastAPI
 from sqlalchemy import text
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv  # 🔥 ADD THIS
 
+load_dotenv() 
 from app.db.database import engine
 
 from app.api import services
