@@ -1,49 +1,62 @@
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
+// 🔥 COMMON REQUEST HANDLER (IMPORTANT)
+async function apiRequest(url: string, options: any = {}) {
+  const res = await fetch(`${BASE_URL}${url}`, options);
+
+  const data = await res.json();
+
+  // ❌ error असेल तर throw कर
+  if (!res.ok) {
+    console.error("API ERROR:", data);
+    throw new Error(data.detail || "Something went wrong");
+  }
+
+  return data;
+}
+
 // 🔥 REGISTER
-export async function registerUser(data: any) {
-  const res = await fetch(`${BASE_URL}/users/register`, {
+export function registerUser(data: any) {
+  return apiRequest("/users/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   });
-
-  return res.json();
 }
 
 // 🔥 LOGIN
-export async function loginUser(data: any) {
-  const res = await fetch(`${BASE_URL}/auth/login`, {
+export function loginUser(data: any) {
+  return apiRequest("/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   });
-
-  return res.json();
 }
 
 // 🔥 SERVICES (WITH TOKEN)
-export async function getServices() {
+export function getServices() {
   const token = localStorage.getItem("token");
 
-  const res = await fetch(`${BASE_URL}/services/`, {
+  if (!token) throw new Error("No token found");
+
+  return apiRequest("/services/", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
-
-  return res.json();
 }
 
-// 🔥 BOOK SERVICE
-export async function bookService(serviceId: string) {
+// 🔥 BOOK SERVICE (FIXED)
+export function bookService(serviceId: string) {
   const token = localStorage.getItem("token");
 
-  const res = await fetch(`${BASE_URL}/booking/`, {
+  if (!token) throw new Error("No token found");
+
+  return apiRequest("/booking/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -52,22 +65,20 @@ export async function bookService(serviceId: string) {
     body: JSON.stringify({
       service_id: serviceId,
       address: "Default Address",
-      problem_description: "General Issue"
+      problem_description: "General Issue",
     }),
   });
-
-  return res.json();
 }
 
-// MY-booking-for-user
-export async function getMyBookings() {
+// 🔥 MY BOOKINGS
+export function getMyBookings() {
   const token = localStorage.getItem("token");
 
-  const res = await fetch(`${BASE_URL}/booking/my-bookings`, {
+  if (!token) throw new Error("No token found");
+
+  return apiRequest("/booking/my-bookings", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
-
-  return res.json();
 }

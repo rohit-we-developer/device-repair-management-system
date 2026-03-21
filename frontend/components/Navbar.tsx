@@ -7,6 +7,7 @@ import { getToken, logout } from "@/lib/auth";
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
+  const [role, setRole] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -14,7 +15,10 @@ export default function Navbar() {
     setIsLoggedIn(!!token);
 
     const savedEmail = localStorage.getItem("user_email");
+    const savedRole = localStorage.getItem("role");
+
     if (savedEmail) setEmail(savedEmail);
+    if (savedRole) setRole(savedRole);
   }, []);
 
   const handleLogout = () => {
@@ -35,35 +39,48 @@ export default function Navbar() {
         {/* LINKS */}
         <div className="flex items-center space-x-6 text-gray-300 text-sm font-medium">
 
-          <Link href="/" className="hover:text-green-400 transition">
+          <Link href="/" className="hover:text-green-400">
             Home
           </Link>
 
-          <Link href="/services" className="hover:text-green-400 transition">
+          <Link href="/services" className="hover:text-green-400">
             Services
           </Link>
 
           {!isLoggedIn ? (
             <>
-              <Link href="/login" className="hover:text-green-400 transition">
+              <Link href="/login" className="hover:text-green-400">
                 Login
               </Link>
 
               <Link
                 href="/register"
-                className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg text-white"
+                className="bg-green-500 px-4 py-2 rounded-lg text-white"
               >
                 Signup
               </Link>
             </>
           ) : (
             <>
-              <Link
-                href="/my-bookings"
-                className="hover:text-green-400 transition"
-              >
-                My Bookings
-              </Link>
+              {/* 🔥 USER NAV */}
+              {role === "user" && (
+                <Link href="/my-bookings" className="hover:text-green-400">
+                  My Bookings
+                </Link>
+              )}
+
+              {/* 🔥 ADMIN NAV */}
+              {role === "admin" && (
+                <>
+                  <Link href="/admin" className="hover:text-green-400">
+                    Admin
+                  </Link>
+
+                  <Link href="/admin/add-service" className="hover:text-green-400">
+                    Add Service
+                  </Link>
+                </>
+              )}
 
               {/* PROFILE */}
               <div className="relative">

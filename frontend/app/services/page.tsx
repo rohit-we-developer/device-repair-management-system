@@ -45,8 +45,18 @@ export default function ServicesPage() {
 
             <button
               onClick={async () => {
-                const res = await bookService(s.id);
-                alert("Service booked!");
+                try {
+                  console.log("SERVICE ID:", s.id);
+
+                  const res = await bookService(s.id);
+
+                  console.log("BOOKING SUCCESS:", res);
+                  alert("Service booked!");
+
+                } catch (err: any) {
+                  console.error("BOOKING ERROR:", err);
+                  alert(err.message || "Booking failed");
+                }
               }}
               className="mt-4 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
             >
