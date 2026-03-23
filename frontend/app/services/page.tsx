@@ -24,7 +24,7 @@ export default function ServicesPage() {
   }, []);
 
   return (
-    <div className="p-10 bg-gray-100 min-h-screen">
+    <div className="pt-24 px-10 pb-10 bg-gray-100 min-h-screen">
 
       <h1 className="text-4xl font-bold text-center mb-10">
         Our Services

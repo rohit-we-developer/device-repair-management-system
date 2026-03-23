@@ -4,6 +4,14 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { usePathname } from "next/navigation";
 
+// 🔥 FONT IMPORT
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
+
 export default function RootLayout({
   children,
 }: {
@@ -16,15 +24,15 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body>
+      <body className={poppins.className}>
 
-        {/* 🔥 Navbar conditionally */}
+        {/* 🔥 Navbar */}
         {!hideNavbar && <Navbar />}
 
-        {/* 🔥 Content spacing fix */}
-        <div style={{ paddingTop: hideNavbar ? "0px" : "80px" }}>
+        {/* 🔥 MAIN CONTENT */}
+        <main>
           {children}
-        </div>
+        </main>
 
       </body>
     </html>
