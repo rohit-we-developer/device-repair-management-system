@@ -117,7 +117,7 @@ from app.models.booking import Booking
 from app.models.service import Service
 from app.models.technician import Technician
 from app.schemas.booking_schema import BookingCreate
-
+from app.models.user import User
 router = APIRouter(prefix="/booking", tags=["Booking"])
 
 # 🔥 FIX: SAME SECRET KEY (ENV मधून)
@@ -205,19 +205,21 @@ def get_my_bookings(
 
 @router.get("/all-bookings")
 def get_all_bookings(db: Session = Depends(get_db)):
-  bookings = db.query(Booking).all()
+    bookings = db.query(Booking).all()
 
-  result = []
+    result = []
 
-  for b in bookings:
+    for b in bookings:
         service = db.query(Service).filter(Service.id == b.service_id).first()
+        user = db.query(User).filter(User.id == b.user_id).first()
 
         result.append({
             "id": str(b.id),
             "status": b.status,
             "address": b.address,
             "problem_description": b.problem_description,
-            "service_name": service.title if service else "Unknown"
+            "service_name": service.title if service else "Unknown",
+            "user_email": user.email if user else "Unknown"
         })
 
-  return result
+    return result

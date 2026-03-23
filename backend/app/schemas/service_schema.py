@@ -3,19 +3,23 @@ from uuid import UUID
 from datetime import datetime
 
 
-class ServiceCreate(BaseModel):
+# 🔹 BASE
+class ServiceBase(BaseModel):
     title: str
     description: str
     price: float
     estimated_time: int
 
 
-class ServiceResponse(BaseModel):
+# 🔹 CREATE
+class ServiceCreate(ServiceBase):
+    pass
+
+
+# 🔹 RESPONSE
+class ServiceResponse(ServiceBase):
     id: UUID
-    title: str
-    description: str
-    price: float
-    estimated_time: int
+    is_active: bool   # 🔥 NEW FIELD (IMPORTANT)
     created_at: datetime
 
     class Config:

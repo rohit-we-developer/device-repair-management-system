@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, TEXT, NUMERIC, INTEGER, TIMESTAMP
+from sqlalchemy import Column, String, TEXT, NUMERIC, INTEGER, TIMESTAMP, Boolean
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.sql import func
 import uuid
@@ -14,4 +14,5 @@ class Service(Base):
     description = Column(TEXT)
     price = Column(NUMERIC(10, 2), nullable=False)
     estimated_time = Column(INTEGER)
+    is_active = Column(Boolean, default=True)
     created_at = Column(TIMESTAMP, server_default=func.now())
