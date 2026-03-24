@@ -1,5 +1,5 @@
 "use client";
-
+import Link from "next/link";
 import { useState } from "react";
 import { registerUser } from "@/lib/api";
 import { motion } from "framer-motion";
@@ -85,7 +85,9 @@ export default function RegisterPage() {
           </p>
 
           <p className="text-[10px] text-gray-400 mt-3 text-center">
-            Terms & Conditions
+           <Link href="/terms" className="hover:text-green-400 transition">
+              Terms & Conditions
+           </Link>
           </p>
 
         </div>

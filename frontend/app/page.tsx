@@ -50,6 +50,14 @@ export default function Home() {
               Get Started
             </Link>
 
+            {/* 🔥 CONTACT BUTTON (NEW) */}
+            <Link
+              href="/contact"
+              className="border border-gray-600 px-6 py-3 rounded-lg text-gray-300 hover:bg-gray-800 transition active:scale-95"
+            >
+              Contact
+            </Link>
+
           </div>
         </motion.div>
 
@@ -133,7 +141,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 🔥 CTA (FIXED — NO GREEN BG) */}
+      {/* 🔥 CTA */}
       <section className="py-20 text-center border-t border-gray-800">
 
         <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-green-400 to-emerald-500 text-transparent bg-clip-text">
@@ -153,55 +161,59 @@ export default function Home() {
 
       </section>
 
+      {/* 🔥 FOOTER */}
       <section className="bg-[#020617] border-t border-gray-800 py-12">
 
-<div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8 text-gray-400">
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8 text-gray-400">
 
-  {/* LOGO */}
-  <div>
-    <h2 className="text-xl font-bold text-green-400 mb-4">
-      💻 LapCare
-    </h2>
-    <p>
-      Fast and reliable laptop repair services at your doorstep.
-    </p>
-  </div>
+          <div>
+            <h2 className="text-xl font-bold text-green-400 mb-4">
+              💻 LapCare
+            </h2>
+            <p>
+              Fast and reliable laptop repair services at your doorstep.
+            </p>
+          </div>
 
-  {/* COMPANY */}
-  <div>
-    <h3 className="text-white font-semibold mb-3">Company</h3>
-    <ul className="space-y-2">
-      <li><a href="#" className="hover:text-green-400">About Us</a></li>
-      <li><a href="/terms" className="hover:text-green-400">Terms & Conditions</a></li>
-      <li><a href="/privacy" className="hover:text-green-400">Privacy Policy</a></li>
-    </ul>
-  </div>
+          <div>
+            <h3 className="text-white font-semibold mb-3">Company</h3>
+            <ul className="space-y-2">
+              <li><a href="#" className="hover:text-green-400">About Us</a></li>
+              <li><a href="/terms" className="hover:text-green-400">Terms & Conditions</a></li>
+              <li><a href="/privacy" className="hover:text-green-400">Privacy Policy</a></li>
 
-  {/* SERVICES */}
-  <div>
-    <h3 className="text-white font-semibold mb-3">Services</h3>
-    <ul className="space-y-2">
-      <li>Screen Repair</li>
-      <li>Battery Replacement</li>
-      <li>Motherboard Repair</li>
-    </ul>
-  </div>
+              {/* 🔥 CONTACT LINK (NEW) */}
+              <li>
+                <Link href="/contact" className="hover:text-green-400">
+                  Contact Us
+                </Link>
+              </li>
 
-  {/* CONTACT */}
-  <div>
-    <h3 className="text-white font-semibold mb-3">Contact</h3>
-    <p>Email: support@lapcare.com</p>
-    <p>Phone: +91 9876543210</p>
-  </div>
+            </ul>
+          </div>
 
-</div>
+          <div>
+            <h3 className="text-white font-semibold mb-3">Services</h3>
+            <ul className="space-y-2">
+              <li>Screen Repair</li>
+              <li>Battery Replacement</li>
+              <li>Motherboard Repair</li>
+            </ul>
+          </div>
 
-{/* BOTTOM */}
-<div className="text-center text-gray-500 mt-10 text-sm">
-  © 2026 LapCare. All rights reserved.
-</div>
+          <div>
+            <h3 className="text-white font-semibold mb-3">Contact</h3>
+            <p>Email: rwagh0450@gmail.com</p>
+            <p>Phone: +91 8626051621</p>
+          </div>
 
-</section>
+        </div>
+
+        <div className="text-center text-gray-500 mt-10 text-sm">
+          © 2026 LapCare. All rights reserved.
+        </div>
+
+      </section>
 
     </div>
   );

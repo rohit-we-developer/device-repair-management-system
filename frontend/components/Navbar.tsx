@@ -31,9 +31,13 @@ export default function Navbar() {
   };
 
   const linkClass = (path: string) =>
-    `hover:text-green-400 transition ${
-      pathname === path ? "text-green-400" : "text-gray-300"
+    `transition ${
+      pathname === path
+        ? "text-green-400"
+        : "text-gray-300 hover:text-green-400"
     }`;
+
+  const getInitial = () => email?.charAt(0).toUpperCase();
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-black/60 backdrop-blur-lg border-b border-gray-800">
@@ -45,22 +49,15 @@ export default function Navbar() {
           💻 LapCare
         </h1>
 
-        {/* DESKTOP MENU */}
+        {/* MENU */}
         <div className="hidden md:flex items-center gap-6 text-sm font-medium">
 
-          <Link href="/" className={linkClass("/")}>
-            Home
-          </Link>
-
-          <Link href="/services" className={linkClass("/services")}>
-            Services
-          </Link>
+          <Link href="/" className={linkClass("/")}>Home</Link>
+          <Link href="/services" className={linkClass("/services")}>Services</Link>
 
           {!isLoggedIn ? (
             <>
-              <Link href="/login" className={linkClass("/login")}>
-                Login
-              </Link>
+              <Link href="/login" className={linkClass("/login")}>Login</Link>
 
               <Link
                 href="/register"
@@ -82,47 +79,55 @@ export default function Navbar() {
                   <Link href="/admin" className={linkClass("/admin")}>
                     Admin
                   </Link>
-
-                  <Link
-                    href="/admin/add-service"
-                    className={linkClass("/admin/add-service")}
-                  >
+                  <Link href="/admin/add-service" className={linkClass("/admin/add-service")}>
                     Add Service
                   </Link>
                 </>
               )}
 
-              {/* PROFILE */}
+              {/* 🔥 PROFILE */}
               <div className="relative">
+
                 <div
                   onClick={() => setOpen(!open)}
-                  className="px-4 py-1 rounded-full bg-green-500 text-white text-sm cursor-pointer hover:bg-green-600"
+                  className="flex items-center gap-2 cursor-pointer group"
                 >
-                  {email || "User"}
+                  {/* AVATAR */}
+                  <div className="w-9 h-9 rounded-full bg-green-500 flex items-center justify-center font-bold text-sm">
+                    {getInitial()}
+                  </div>
+
+                  {/* EMAIL SHORT */}
+                  <span className="text-gray-300 text-sm max-w-[120px] truncate group-hover:text-green-400 transition">
+                    {email}
+                  </span>
                 </div>
 
+                {/* 🔥 DROPDOWN */}
                 {open && (
-                  <div className="absolute right-0 mt-2 w-52 bg-white text-black rounded-lg shadow-lg py-2">
+                  <div className="absolute right-0 mt-3 w-56 bg-[#0b1220]/90 backdrop-blur-lg border border-gray-700 rounded-xl shadow-xl overflow-hidden animate-fadeIn">
 
-                    <p className="px-4 py-2 text-sm border-b">
-                      {email}
-                    </p>
+                    <div className="px-4 py-3 border-b border-gray-700">
+                      <p className="text-sm text-gray-400">Signed in as</p>
+                      <p className="text-white text-sm truncate">{email}</p>
+                    </div>
 
                     <button
                       onClick={handleLogout}
-                      className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                      className="w-full text-left px-4 py-3 text-red-400 hover:bg-red-500/10 transition"
                     >
-                      Logout
+                      🚪 Logout
                     </button>
 
                   </div>
                 )}
+
               </div>
             </>
           )}
         </div>
 
-        {/* MOBILE BUTTON */}
+        {/* MOBILE */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="md:hidden text-white text-2xl"
@@ -136,41 +141,24 @@ export default function Navbar() {
       {menuOpen && (
         <div className="md:hidden px-6 pb-4 bg-black/90 backdrop-blur-lg space-y-4 text-gray-300">
 
-          <Link href="/" className="block">
-            Home
-          </Link>
-
-          <Link href="/services" className="block">
-            Services
-          </Link>
+          <Link href="/" className="block">Home</Link>
+          <Link href="/services" className="block">Services</Link>
 
           {!isLoggedIn ? (
             <>
-              <Link href="/login" className="block">
-                Login
-              </Link>
-
-              <Link href="/register" className="block text-green-400">
-                Signup
-              </Link>
+              <Link href="/login" className="block">Login</Link>
+              <Link href="/register" className="block text-green-400">Signup</Link>
             </>
           ) : (
             <>
               {role === "user" && (
-                <Link href="/my-bookings" className="block">
-                  My Bookings
-                </Link>
+                <Link href="/my-bookings" className="block">My Bookings</Link>
               )}
 
               {role === "admin" && (
                 <>
-                  <Link href="/admin" className="block">
-                    Admin
-                  </Link>
-
-                  <Link href="/admin/add-service" className="block">
-                    Add Service
-                  </Link>
+                  <Link href="/admin" className="block">Admin</Link>
+                  <Link href="/admin/add-service" className="block">Add Service</Link>
                 </>
               )}
 

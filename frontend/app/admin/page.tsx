@@ -11,7 +11,7 @@ export default function AdminDashboard() {
   const [bookings, setBookings] = useState<any[]>([]);
   const [services, setServices] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-
+  const [contacts, setContacts] = useState<any[]>([]);
   const [editingService, setEditingService] = useState<any>(null);
   const [form, setForm] = useState({
     title: "",
@@ -46,6 +46,7 @@ export default function AdminDashboard() {
         servicesRes,
         monthlyRes,
         statusRes,
+        contactsRes 
       ] = await Promise.all([
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/revenue`, {
           headers: { Authorization: `Bearer ${token}` },
@@ -68,6 +69,7 @@ export default function AdminDashboard() {
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/graph/booking-status`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/contact/`)
       ]);
 
       const revenue = await revenueRes.json();
@@ -75,7 +77,8 @@ export default function AdminDashboard() {
       const topService = await topServiceRes.json();
       const bookingsData = await bookingsRes.json();
       const servicesData = await servicesRes.json();
-
+      const contactsData = await contactsRes.json();
+      setContacts(contactsData);
       let monthly: any[] = [];
       let status: any[] = [];
 
