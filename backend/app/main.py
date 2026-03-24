@@ -5,7 +5,7 @@ from dotenv import load_dotenv  # 🔥 ADD THIS
 
 load_dotenv() 
 from app.db.database import engine
-
+from app.api import contact
 from app.api import services
 from app.api import users
 from app.api import booking
@@ -42,7 +42,7 @@ app.include_router(booking.router)
 app.include_router(auth.router)
 app.include_router(review.router, prefix="/reviews", tags=["Reviews"])  # 🔥 ADD THIS
 app.include_router(admin.router, prefix="/admin", tags=["Admin"])
-
+app.include_router(contact.router)
 # ✅ Health check
 @app.get("/")
 def root():
